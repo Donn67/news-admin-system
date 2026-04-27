@@ -1,7 +1,7 @@
 -- 既存のデータベースを削除
 DROP DATABASE IF EXISTS news_admin;
 
--- データベース作成 (owner: yourself / 名前: news_admin)
+
 CREATE DATABASE news_admin
     OWNER = yourself
     ENCODING = 'UTF8'
@@ -10,10 +10,10 @@ CREATE DATABASE news_admin
     TEMPLATE = template0;
 
 
--- 接続
+-- terminal
 \c news_admin;
 
--- ユーザーテーブル
+--
 CREATE TABLE "user" (
                         id           SERIAL PRIMARY KEY,
                         username     VARCHAR(20)  NOT NULL UNIQUE,
@@ -34,7 +34,7 @@ COMMENT ON COLUMN "user".user_pic    IS 'アバター';
 COMMENT ON COLUMN "user".create_time IS '作成日時';
 COMMENT ON COLUMN "user".update_time IS '更新日時';
 
--- カテゴリテーブル
+
 CREATE TABLE category (
                           id            SERIAL PRIMARY KEY,
                           category_name VARCHAR(32) NOT NULL,
@@ -52,7 +52,7 @@ COMMENT ON COLUMN category.create_user   IS '作成者ID';
 COMMENT ON COLUMN category.create_time   IS '作成日時';
 COMMENT ON COLUMN category.update_time   IS '更新日時';
 
--- 記事テーブル
+
 CREATE TABLE article (
                          id          SERIAL PRIMARY KEY,
                          title       VARCHAR(30)   NOT NULL,
