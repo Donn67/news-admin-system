@@ -2,14 +2,17 @@ package com.iov.utils;
 
 //import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+
+import org.springframework.stereotype.Component;
+
 import java.security.MessageDigest;
 import java.util.Objects;
-
+@Component
 public class SecurityPasswordUtil {
-    private static final String SALT = "news-admin-salt";
-    private static char[] hexDigits = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'};
+    private  String SALT = "news-admin-salt";
+    private  char[] hexDigits = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'};
 
-    public static String getSHA256(String str) {
+    public  String getSHA256(String str) {
         try {
             String saltStr = str + SALT;
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
@@ -25,7 +28,7 @@ public class SecurityPasswordUtil {
         }
     }
 
-    public static boolean checkPassword(String raw, String encoded) {
+    public  boolean checkPassword(String raw, String encoded) {
         return Objects.equals(getSHA256(raw), encoded);
     }
 }

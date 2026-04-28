@@ -21,12 +21,12 @@ public class Result<T> {
 
 
     public static Result success() {
-        return new Result(200, "操作成功", null);
+        return new Result(5000, "操作成功", null);
     }
     public static Result fail(String message){
-        return new Result(400,message,null);
+        return new Result(5001,message,null);
     }
     public static Result error(String message) {
-        return new Result(500, message, null);
+        return new Result(5002, message, null);
     }
 }

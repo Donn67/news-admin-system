@@ -13,6 +13,7 @@ public class GlobalExceptionHandler {
     }
     @ExceptionHandler(Exception.class)
     public Result handleAll(Exception e) {
-        return Result.error("システムエラー");
+        e.printStackTrace();
+        return Result.error(StringUtils.hasLength(e.getMessage())? e.getMessage() :"システムエラー");
     }
 }

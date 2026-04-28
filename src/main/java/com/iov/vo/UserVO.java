@@ -1,0 +1,16 @@
+package com.iov.vo;
+
+import lombok.Data;
+
+import java.time.LocalDateTime;
+
+@Data
+public class UserVO {
+    private Integer id;
+    private String username;
+    private String nickname;
+    private String email;
+    private String userPic;
+    private LocalDateTime createTime;
+    private LocalDateTime updateTime;
+}

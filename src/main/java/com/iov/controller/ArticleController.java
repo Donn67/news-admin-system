@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/article" )
 public class ArticleController {
-//    @GetMapping
-//    public Result<String> list(){
-//
-//    }
+    @GetMapping
+    public Result<String> list(){
+        return Result.success("所有文章数据。。。");
+    }
 }
