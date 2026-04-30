@@ -16,12 +16,15 @@ import com.iov.utils.SecurityPasswordUtil;
 import com.iov.utils.ThreadLocalUtil;
 import com.iov.vo.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
@@ -32,6 +35,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     private JwtUtil jwtUtil;
     @Autowired
     private SecurityPasswordUtil passwordUtil;
+    @Autowired
+    private StringRedisTemplate stringRedisTemplate;
 
     // 根据用户名查询
     @Override
@@ -73,7 +78,12 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         Map<String, Object> claims = new HashMap<>();
         claims.put("id", loginUser.getId());
         claims.put("username", loginUser.getUsername());
-        return jwtUtil.genToken(claims);
+        String token=jwtUtil.genToken(claims);
+        Long expire = jwtUtil.getExpire();
+        ValueOperations<String, String> opsForValue = stringRedisTemplate.opsForValue();
+        String key="login:token:"+loginUser.getId();
+        opsForValue.set(key,token,expire, TimeUnit.MILLISECONDS);
+        return token;
     }
 
 
@@ -139,5 +149,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         wrapper.set(User::getUpdateTime, LocalDateTime.now());
         wrapper.eq(User::getId, id);
         this.update(wrapper);
+        stringRedisTemplate.delete("login:token:"+id);
     }
 }

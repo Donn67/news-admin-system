@@ -2,6 +2,7 @@ package com.iov.utils;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Component;
 import java.util.Date;
 import java.util.Map;
 @Component
+@Data
 public class JwtUtil {
     @Value("${jwt.secret}")
     private String KEY ;
@@ -25,9 +27,7 @@ public class JwtUtil {
 
 
     public  Map<String, Object> parseToken(String token) {
-        if ((token.startsWith("Bearer "))){
-            token=token.substring(7);
-        }
+
         return JWT.require(Algorithm.HMAC256(KEY))
                 .build()
                 .verify(token)

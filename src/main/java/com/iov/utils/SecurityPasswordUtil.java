@@ -9,12 +9,12 @@ import java.security.MessageDigest;
 import java.util.Objects;
 @Component
 public class SecurityPasswordUtil {
-    private  String SALT = "news-admin-salt";
     private  char[] hexDigits = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'};
 
     public  String getSHA256(String str) {
         try {
-            String saltStr = str + SALT;
+            String salt = "news-admin-salt";
+            String saltStr = str + salt;
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
             byte[] bytes = digest.digest(saltStr.getBytes());
             StringBuilder sb = new StringBuilder();

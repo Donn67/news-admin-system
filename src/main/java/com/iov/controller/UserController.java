@@ -31,14 +31,14 @@ public class UserController {
 
 
     @PostMapping("/register")
-    public Result<?> register(@Validated UserRegisterDTO dto) {
+    public Result<?> register(@RequestBody @Validated UserRegisterDTO dto) {
         userService.register(dto);
         return Result.success();
     }
 
 
     @PostMapping("/login")
-    public Result<String> login(@Validated UserLoginDTO dto) {
+    public Result<String> login(@RequestBody @Validated UserLoginDTO dto) {
         String token = userService.login(dto);
         return Result.success(token);
     }

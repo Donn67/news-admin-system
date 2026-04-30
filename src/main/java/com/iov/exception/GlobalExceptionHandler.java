@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class GlobalExceptionHandler {
     @ExceptionHandler(BusinessException.class)
     public Result handleBusinessException(BusinessException be){
+        be.printStackTrace();
         return Result.fail(StringUtils.hasLength(be.getMessage())? be.getMessage() : "処理失敗");
     }
     @ExceptionHandler(Exception.class)

@@ -1,18 +1,21 @@
-package com.iov.pojo;
+package com.iov.vo;
 
-
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+
 @Data
-public class Article {
+public class ArticleVO {
     private Integer id;
     private String title;
     private String content;
     private String coverImg;
-    private String state;//发布状态 已发布|草稿
+    private String state;
     private Integer categoryId;
     private Integer createUser;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createTime;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime updateTime;
 }
