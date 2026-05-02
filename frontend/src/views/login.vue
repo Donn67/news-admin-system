@@ -1,7 +1,11 @@
 <script setup>
 import { User, Lock } from '@element-plus/icons-vue'
 import { ref } from 'vue'
-import {userRegisterService} from '@/api/user.js'
+import {userRegisterService,userLoginService} from '@/api/user.js'
+import { ElMessage } from 'element-plus'
+import {useRouter} from 'vue-router'
+import { useTokenStore } from '../stores/token'
+
 //控制注册与登录表单的显示， 默认显示注册
 const isRegister = ref(false)
 const registerData=ref({
@@ -9,7 +13,13 @@ const registerData=ref({
     password:'',
     rePassword:''
 })
-
+const clearData=()=>{
+    registerData.value={
+    username:'',
+    password:'',
+    rePassword:''
+}
+}
 const validateRePassword=(rule,value,callback)=>{
     if(value!==registerData.value.password){
         callback(new Error('パスワードが一致しません'))
@@ -19,12 +29,22 @@ const validateRePassword=(rule,value,callback)=>{
 }
 const register=async()=>{
     let result=await userRegisterService(registerData.value);
-    if(result.code===5000){
-        alert(result.message?result.message:'新規登録に成功しました')
-    }else(
-        alert('新規登録に失敗しました')
-    )
+    // ElMessage.success(result.message?result.message:'新規登録に成功しました')
+    ElMessage.success('新規登録に成功しました')
 }
+const router=useRouter();
+const tokenStore=useTokenStore()
+const login = async () => {
+    const loginData = {
+        username: registerData.value.username,
+        password: registerData.value.password
+    };
+    let result = await userLoginService(loginData);
+    tokenStore.setToken(result.data)
+    ElMessage.success('ログインに成功しました')
+    router.push('/')
+
+};
 //校验规则
 const rules={
     username:[
@@ -69,21 +89,21 @@ const rules={
                     </el-button>
                 </el-form-item>
                 <el-form-item class="flex">
-                    <el-link type="info" :underline="false" @click="isRegister = false">
+                    <el-link type="info" :underline="false" @click="isRegister = false;clearData()">
                         ← 戻る
                     </el-link>
                 </el-form-item>
             </el-form>
             <!-- 登录表单 -->
-            <el-form ref="form" size="large" autocomplete="off" v-else>
+            <el-form ref="form" size="large" autocomplete="off" v-else :model="registerData" :rules="rules">
                 <el-form-item>
                     <h1>ログイン</h1>
                 </el-form-item>
-                <el-form-item>
-                    <el-input :prefix-icon="User" placeholder="ユーザー名を入力してください"></el-input>
+                <el-form-item prop="username">
+                    <el-input :prefix-icon="User" placeholder="ユーザー名を入力してください" v-model="registerData.username"></el-input>
                 </el-form-item>
-                <el-form-item>
-                    <el-input name="password" :prefix-icon="Lock" type="password" placeholder="パスワードを入力してください"></el-input>
+                <el-form-item prop="password">
+                    <el-input name="password" :prefix-icon="Lock" type="password" placeholder="パスワードを入力してください" v-model="registerData.password"></el-input>
                 </el-form-item>
                 <el-form-item class="flex">
                     <div class="flex">
@@ -93,10 +113,10 @@ const rules={
                 </el-form-item>
                 <!-- 登录按钮 -->
                 <el-form-item>
-                    <el-button class="button" type="primary" auto-insert-space>ログイン</el-button>
+                    <el-button class="button" type="primary" auto-insert-space @click="login">ログイン</el-button>
                 </el-form-item>
                 <el-form-item class="flex">
-                    <el-link type="info" :underline="false" @click="isRegister = true">
+                    <el-link type="info" :underline="false" @click="isRegister = true;clearData()">
                         新規登録 →
                     </el-link>
                 </el-form-item>

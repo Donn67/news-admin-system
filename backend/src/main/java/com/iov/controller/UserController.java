@@ -40,6 +40,8 @@ public class UserController {
     @PostMapping("/login")
     public Result<String> login(@RequestBody @Validated UserLoginDTO dto) {
         String token = userService.login(dto);
+        System.out.println(dto);
+        System.out.println(token);
         return Result.success(token);
     }
 

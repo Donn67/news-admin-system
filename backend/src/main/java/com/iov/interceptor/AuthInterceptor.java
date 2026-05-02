@@ -23,10 +23,15 @@ public class AuthInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String token = request.getHeader("Authorization");
-        if ((token.startsWith("Bearer "))){
-            token=token.substring(7);
+        if (token == null || token.isEmpty()) {
+            response.setStatus(401);
+            return false;
+        }
+        if (token.startsWith("Bearer ")) {
+            token = token.substring(7);
         }
         try{
+
             Map<String, Object> claims = jwtUtil.parseToken(token);
             Integer id=Integer.valueOf(claims.get("id").toString());
             ValueOperations<String, String> opsForValue = stringRedisTemplate.opsForValue();

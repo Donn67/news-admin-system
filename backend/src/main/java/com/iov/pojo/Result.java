@@ -16,12 +16,12 @@ public class Result<T> {
 
 
     public static <E> Result<E> success(E data) {
-        return new Result<>(0, "操作成功", data);
+        return new Result<>(5000, "操作完了", data);
     }
 
 
     public static Result success() {
-        return new Result(5000, "操作成功", null);
+        return new Result(5000, "操作完了", null);
     }
     public static Result fail(String message){
         return new Result(5001,message,null);
