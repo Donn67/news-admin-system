@@ -27,8 +27,6 @@ instance.interceptors.response.use(
 
                 router.push('/login')
         }else{ElMessage.error('サーバーエラーが発生しました')}
-            
-
         return Promise.reject(err);//异步的状态转化成失败的状态
     }
 )

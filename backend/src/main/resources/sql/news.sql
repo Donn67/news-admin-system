@@ -16,11 +16,11 @@ CREATE DATABASE news_admin
 --
 CREATE TABLE "user" (
                         id           SERIAL PRIMARY KEY,
-                        username     VARCHAR(20)  NOT NULL UNIQUE,
-                        password     VARCHAR(32),
-                        nickname     VARCHAR(10)  DEFAULT '',
+                        username     VARCHAR(32)  NOT NULL UNIQUE,
+                        password     VARCHAR(64),
+                        nickname     VARCHAR(32)  DEFAULT '',
                         email        VARCHAR(128) DEFAULT '',
-                        user_pic     VARCHAR(128) DEFAULT '',
+                        user_pic     VARCHAR(512) DEFAULT '',
                         create_time  TIMESTAMP    NOT NULL,
                         update_time  TIMESTAMP    NOT NULL
 );
@@ -55,9 +55,9 @@ COMMENT ON COLUMN category.update_time   IS '更新日時';
 
 CREATE TABLE article (
                          id          SERIAL PRIMARY KEY,
-                         title       VARCHAR(30)   NOT NULL,
+                         title       VARCHAR(128)   NOT NULL,
                          content     VARCHAR(10000) NOT NULL,
-                         cover_img   VARCHAR(128)  NOT NULL,
+                         cover_img   VARCHAR(512)  NOT NULL,
                          state       VARCHAR(3)    DEFAULT '下書き',
                          category_id INTEGER,
                          create_user INTEGER       NOT NULL,

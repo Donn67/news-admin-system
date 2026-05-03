@@ -11,11 +11,11 @@ public class ArticleUpdateDTO {
     @NotNull
     private Integer id;
     @NotEmpty
-    @Pattern(regexp = "^\\S{1,20}$")
+    @Pattern(regexp = "^\\S{1,120}$")
     private String title;
     @NotEmpty
     private String content;
-    @NotEmpty
+//    @NotEmpty
     @URL
     private String coverImg;
     @NotEmpty

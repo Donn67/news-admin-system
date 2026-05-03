@@ -27,7 +27,7 @@ public class ArticleController {
         return Result.success(page);
     }
     @PutMapping
-    public Result update(@Validated ArticleUpdateDTO dto){
+    public Result update(@Validated @RequestBody ArticleUpdateDTO dto){
         articleService.edit(dto);
         return Result.success();
     }

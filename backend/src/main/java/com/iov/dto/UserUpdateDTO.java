@@ -10,7 +10,7 @@ import lombok.Data;
 public class UserUpdateDTO {
 
     @NotEmpty
-    @Pattern(regexp = "^\\S{1,10}$")
+    @Pattern(regexp = "^\\S{1,32}$")
     private String nickname;
     @NotEmpty
     @Email

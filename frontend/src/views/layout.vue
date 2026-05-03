@@ -10,6 +10,43 @@ import {
     CaretBottom
 } from '@element-plus/icons-vue'
 import avatar from '@/assets/default.png'
+import {userInfoService} from '@/api/user'
+import {useUserInfoStore} from '@/stores/userInfo'
+import { useRouter } from 'vue-router'
+import { useTokenStore } from '../stores/token'
+import { ElMessage,ElMessageBox } from 'element-plus'
+
+const userInfoStore=useUserInfoStore()
+const tokenStore=useTokenStore()
+const getUserInfo = async () => { 
+    let result=await userInfoService()
+    userInfoStore.setUserInfo(result.data)
+}
+getUserInfo()
+//下拉条目
+const router = useRouter()
+const handleCommand = (command) => { 
+    if(command==='logout'){
+        ElMessageBox.confirm('ログアウトしますか？', '確認', {
+            confirmButtonText: 'はい',
+            cancelButtonText: 'いいえ',
+            type: 'warning'
+        }).then(() => {
+            // 执行退出逻辑
+            // 1. 清除 Token 
+            // 2. 清除用户信息
+            // 3. 跳转到登录页
+            tokenStore.removeToken();
+            userInfoStore.removeUserInfo();
+            router.push('/login');
+            ElMessage.success('ログアウトしました');
+        }).catch(() => {
+            // 取消操作
+        })
+    }else{
+        router.push('/user/'+command)
+    }
+}
 </script>
 
 <template>
@@ -63,19 +100,19 @@ import avatar from '@/assets/default.png'
         <el-container>
             <!-- 头部区域 -->
             <el-header>
-                <div>管理人：<strong>donn</strong></div>
-                <el-dropdown placement="bottom-end">
+                <div>管理人：<strong>{{userInfoStore.userInfo.nickname}}</strong></div>
+                <el-dropdown placement="bottom-end" @command="handleCommand">
                     <span class="el-dropdown__box">
-                        <el-avatar :src="avatar" />
+                        <el-avatar :src="userInfoStore.userInfo?.userPic ? userInfoStore.userInfo.userPic : avatar" />
                         <el-icon>
                             <CaretBottom />
                         </el-icon>
                     </span>
                     <template #dropdown>
                         <el-dropdown-menu>
-                            <el-dropdown-item command="profile" :icon="User">基本情報</el-dropdown-item>
+                            <el-dropdown-item command="info" :icon="User">基本情報</el-dropdown-item>
                             <el-dropdown-item command="avatar" :icon="Crop">アバター変更</el-dropdown-item>
-                            <el-dropdown-item command="password" :icon="EditPen">パスワード再設定</el-dropdown-item>
+                            <el-dropdown-item command="resetPassword" :icon="EditPen">パスワード再設定</el-dropdown-item>
                             <el-dropdown-item command="logout" :icon="SwitchButton">ログアウト</el-dropdown-item>
                         </el-dropdown-menu>
                     </template>

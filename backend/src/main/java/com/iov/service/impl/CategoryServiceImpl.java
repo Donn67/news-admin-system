@@ -50,11 +50,12 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
 
     @Override
     public List<CategoryVO> listAll() {//文章分类共享
-//        LambdaQueryWrapper<Category> wrapper=new LambdaQueryWrapper<>();
+        LambdaQueryWrapper<Category> wrapper=new LambdaQueryWrapper<>();
 //        Map<String ,Object> map=ThreadLocalUtil.get();
 //        Integer id=(Integer) map.get("id");
 //        wrapper.eq(Category::getCreateUser,id);
-        List<Category> list=mapper.selectList(null);
+        wrapper.orderByAsc(Category::getCreateTime);
+        List<Category> list=mapper.selectList(wrapper);
         return list.stream().map(CategoryServiceImpl::apply).collect(Collectors.toList());
     }
 
