@@ -170,28 +170,56 @@ const handleEdit =  (row) => {
     }
     visibleDrawer.value = true
 }
+// const submitArticle = async (state) => {
+//
+//     articleModel.value.state = state
+//
+//     let result
+//     if (isEdit.value) {
+//         // 执行编辑
+//         result = await articleEditService(articleModel.value)
+//     } else {
+//         // 执行新增
+//         result = await articleAddService(articleModel.value)
+//     }
+//
+//     if (result.code == 5000) {
+//         ElMessage.success(isEdit.value ? '記事を編集しました' : '記事を追加しました')
+//         visibleDrawer.value = false
+//         clearData()
+//         articleList() // 刷新列表
+//     } else {
+//         ElMessage.error(result.message || '操作失败')
+//     }
+// }
+
+// ... existing code ...
 const submitArticle = async (state) => {
 
-    articleModel.value.state = state
-    
-    let result
-    if (isEdit.value) {
-        // 执行编辑
-        result = await articleEditService(articleModel.value)
-    } else {
-        // 执行新增
-        result = await articleAddService(articleModel.value)
-    }
+  articleModel.value.state = state
 
-    if (result.code == 5000) {
-        ElMessage.success(isEdit.value ? '記事を編集しました' : '記事を追加しました')
-        visibleDrawer.value = false
-        clearData()
-        articleList() // 刷新列表
-    } else {
-        ElMessage.error(result.message || '操作失败')
-    }
+  let result
+  if (isEdit.value) {
+    // 执行编辑
+    result = await articleEditService(articleModel.value)
+  } else {
+    // 执行新增 - 移除id字段
+    const { id, ...articleData } = articleModel.value
+    result = await articleAddService(articleData)
+  }
+
+  if (result.code == 5000) {
+    ElMessage.success(isEdit.value ? '記事を編集しました' : '記事を追加しました')
+    visibleDrawer.value = false
+    clearData()
+    articleList() // 刷新列表
+  } else {
+    ElMessage.error(result.message || '操作失败')
+  }
 }
+// ... existing code ...
+
+
 //删除
 const deleteArticle = async(id) => { 
     if (!id) {
