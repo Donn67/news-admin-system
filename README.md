@@ -115,37 +115,37 @@ end
 
 #### 記事作成
 
-![記事作成画面](./screenshots/article/屏幕截图 2026-06-06 072843.png)
+![記事作成画面](./screenshots/article/072843.png)
 
-![記事作成画面](./screenshots/article/屏幕截图 2026-06-06 073047.png)
+![記事作成画面](./screenshots/article/073047.png)
 
-![記事作成画面](./screenshots/article/屏幕截图 2026-06-06 074824.png)
+![記事作成画面](./screenshots/article/074824.png)
 
-![記事作成画面](./screenshots/article/屏幕截图 2026-06-06 080232.png)
+![記事作成画面](./screenshots/article/080232.png)
 
-![記事作成画面](./screenshots/article/屏幕截图 2026-06-06 080241.png)
+![記事作成画面](./screenshots/article/080241.png)
 
 *リッチテキストエディタで記事を作成*
 
 #### 記事編集
 
-![記事編集画面](./screenshots/article/屏幕截图 2026-06-06 135730.png)
+![記事編集画面](./screenshots/article/135730.png)
 
-![記事作成画面](./screenshots/article/屏幕截图 2026-06-06 140004.png)
+![記事作成画面](./screenshots/article/140004.png)
 
 *既存記事の編集*
 
 #### 記事削除（確認モーダル）
 
-![記事削除確認](./screenshots/article/屏幕截图 2026-06-06 072808.png)
+![記事削除確認](./screenshots/article/072808.png)
 
-![記事作成画面](./screenshots/article/屏幕截图 2026-06-06 072817.png)
+![記事作成画面](./screenshots/article/072817.png)
 
 *削除前に確認ダイアログを表示*
 
 #### 記事一覧（ページネーション・検索）
 
-![一覧](./screenshots/article/2026-06-06 082138.png)
+![一覧](./screenshots/article/082138.png)
 
 *記事一覧：ページネーション、タイトル検索、カテゴリ絞り込みが可能*
 
@@ -157,7 +157,7 @@ end
 
 #### *カテゴリの一覧表示*
 
-![カテゴリ一覧](./screenshots/category/屏幕截图 2026-06-06 141336.png)
+![カテゴリ一覧](./screenshots/category/141336.png)
 
 *全カテゴリの一覧。カテゴリ名・別名・作成日時などを表示。*
 
@@ -193,29 +193,29 @@ end
 
 #### アバターアップロード（Using OSS）
 
-![カテゴリ一覧](./screenshots/user/屏幕截图 2026-06-06 145958.png)
+![カテゴリ一覧](./screenshots/user/145958.png)
 
-![カテゴリ一覧](./screenshots/user/屏幕截图 2026-06-06 150007.png)
+![カテゴリ一覧](./screenshots/user/150007.png)
 
 *画像を選択してアップロード*
 
-![アップロード成功後](./screenshots/user/屏幕截图 2026-06-06 150017.png)
+![アップロード成功後](./screenshots/user/150017.png)
 
 *アップロード完了後、アバターが更新される*
 
 #### ニックネームとメールアドレス変更
 
-![パスワード変更画面](./screenshots/user/屏幕截图 2026-06-06 082938.png)
+![パスワード変更画面](./screenshots/user/082938.png)
 
-![パスワード変更画面](./screenshots/user/屏幕截图 2026-06-06 082946.png)
+![パスワード変更画面](./screenshots/user/082946.png)
 
 *新しいニックネームとメールアドレスを入力して更新*
 
 #### パスワード変更
 
-![パスワード変更画面](./screenshots/user/屏幕截图 2026-06-06 083202.png)
+![パスワード変更画面](./screenshots/user/083202.png)
 
-![パスワード変更画面](./screenshots/user/屏幕截图 2026-06-06 083212.png)
+![パスワード変更画面](./screenshots/user/083212.png)
 
 *パスワード変更フォーム*
 
@@ -227,9 +227,9 @@ end
 
 #### Alibaba OSS 管理画面（バケット設定）
 
-![OSSバケット](./screenshots/oss/屏幕截图 2026-04-30 111255.png)
+![OSSバケット](./screenshots/oss/111255.png)
 
-![OSSバケット](./screenshots/oss/屏幕截图 2026-05-03 151639.png)
+![OSSバケット](./screenshots/oss/151639.png)
 
 *OSS バケット内にアップロードされた画像ファイル*
 
